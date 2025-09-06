@@ -46,11 +46,17 @@ app/
 │       └── [id]/
 │           └── route.ts     # GET by id, DELETE, PATCH
 ├── components/
-│   └── Header.tsx          # Navigation header
+│   ├── events/
+│   │   ├── EventCard.tsx   # Individual event display
+│   │   ├── EventList.tsx   # Reusable event list component
+│   │   ├── EventListWithSearch.tsx # Client wrapper with search/filter
+│   │   └── SearchAndFilter.tsx # Search and filter controls
+│   ├── Header.tsx          # Navigation header
+│   └── HeroSection.tsx     # Hero section component
 ├── types/
 │   └── event.ts            # Event interfaces and types
 ├── layout.tsx              # Root layout with header
-├── page.tsx               # Home page
+├── page.tsx               # Home page with event list
 └── globals.css            # Global styles
 ```
 
@@ -84,9 +90,32 @@ interface Event {
 }
 ```
 
+### Module 2: Event List (Home Page) ✅
+- **Event Display**: Clean card-based layout showing event details
+- **Search Functionality**: Real-time search by title, description, or location
+- **Category Filtering**: Filter events by Conference, Workshop, Meetup, or Other
+- **API Integration**: Fetches data from `/api/events` endpoint
+- **Responsive Design**: Works seamlessly on all screen sizes
+- **Loading States**: Proper loading and error handling
+
+#### Components Created:
+- `EventCard.tsx`: Individual event display component
+- `SearchAndFilter.tsx`: Search bar and category filter component
+- `EventList.tsx`: Reusable event list component (accepts events as props)
+- `EventListWithSearch.tsx`: Client wrapper with search/filter functionality
+- Updated `page.tsx`: Server-side data fetching with client-side search
+
+#### Features:
+- ✅ **Real-time Search**: Instant filtering as you type
+- ✅ **Category Filter**: Dropdown to filter by event type
+- ✅ **Event Cards**: Clean, modern card design with hover effects
+- ✅ **Date Formatting**: Human-readable date and time display
+- ✅ **RSVP Count**: Shows attendee count for each event
+- ✅ **Empty States**: Helpful messages when no events found
+- ✅ **Error Handling**: Graceful error display with retry options
+
 ## Next Steps
 
-- [ ] Module 2: Event List (Home Page)
 - [ ] Module 3: Event Details Page
 - [ ] Module 4: Create Event Page
 - [ ] Module 5: My Events Page
