@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { Event } from '@/app/types/event';
 
 interface EventCardProps {
@@ -33,8 +34,9 @@ export default function EventCard({ event }: EventCardProps) {
   };
 
   return (
-    <div className="bg-white/60 backdrop-blur-sm rounded-2xl border border-gray-100 hover:shadow-lg transition-all duration-300 hover:bg-white/80 group">
-      <div className="p-6">
+    <Link href={`/events/${event.id}`} className="block">
+      <div className="bg-white/60 backdrop-blur-sm rounded-2xl border border-gray-100 hover:shadow-lg transition-all duration-300 hover:bg-white/80 group cursor-pointer">
+        <div className="p-6">
         {/* Header */}
         <div className="flex items-start justify-between mb-4">
           <div className="flex-1">
@@ -78,11 +80,12 @@ export default function EventCard({ event }: EventCardProps) {
 
         {/* Action Button */}
         <div className="flex justify-end">
-          <button className="px-4 py-2 bg-gray-900 text-white text-sm font-medium rounded-full hover:bg-gray-800 transition-colors duration-200">
+          <span className="px-4 py-2 bg-gray-900 text-white text-sm font-medium rounded-full hover:bg-gray-800 transition-colors duration-200">
             View Details
-          </button>
+          </span>
+        </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }

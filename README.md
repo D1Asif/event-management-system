@@ -53,6 +53,10 @@ app/
 │   │   └── SearchAndFilter.tsx # Search and filter controls
 │   ├── Header.tsx          # Navigation header
 │   └── HeroSection.tsx     # Hero section component
+├── events/
+│   └── [id]/
+│       ├── page.tsx        # Dynamic event details page
+│       └── not-found.tsx   # Custom 404 page
 ├── types/
 │   └── event.ts            # Event interfaces and types
 ├── layout.tsx              # Root layout with header
@@ -114,8 +118,32 @@ interface Event {
 - ✅ **Empty States**: Helpful messages when no events found
 - ✅ **Error Handling**: Graceful error display with retry options
 
+### Module 3: Event Details Page ✅
+- **Dynamic Routing**: Dynamic route at `/events/[id]` using Next.js App Router
+- **Event Details Display**: Complete event information with modern design
+- **Server-Side Rendering**: SEO-friendly with server-side data fetching
+- **Navigation**: Back button and clickable event cards
+- **Error Handling**: Custom 404 page for non-existent events
+- **Metadata Generation**: Dynamic SEO metadata for each event
+
+#### Components Created:
+- `EventDetails.tsx`: Main event details display component
+- `/events/[id]/page.tsx`: Dynamic route page with server-side data fetching
+- `/events/[id]/not-found.tsx`: Custom 404 page for events
+- Updated `EventCard.tsx`: Added clickable links to event details
+
+#### Features:
+- ✅ **Dynamic Routes**: `/events/[id]` pattern for individual events
+- ✅ **Server-Side Data Fetching**: Fast initial page loads
+- ✅ **SEO Optimization**: Dynamic metadata generation
+- ✅ **Responsive Design**: Works on all screen sizes
+- ✅ **Clickable Cards**: Entire event card is clickable
+- ✅ **Back Navigation**: Easy return to events list
+- ✅ **Error Handling**: Graceful 404 page for missing events
+- ✅ **Event Information**: Complete details including date, location, category
+- ✅ **RSVP Functionality**: Placeholder for future RSVP feature
+
 ## Next Steps
 
-- [ ] Module 3: Event Details Page
 - [ ] Module 4: Create Event Page
 - [ ] Module 5: My Events Page
