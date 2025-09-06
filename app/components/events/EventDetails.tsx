@@ -1,11 +1,14 @@
 import { Event } from '@/app/types/event';
 import Link from 'next/link';
+import EventActionButtons from './EventActionButtons';
+import RSVPButton from './RSVPButton';
 
 interface EventDetailsProps {
   event: Event;
 }
 
 export default function EventDetails({ event }: EventDetailsProps) {
+
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     return {
@@ -128,14 +131,12 @@ export default function EventDetails({ event }: EventDetailsProps) {
           {/* Sidebar */}
           <div className="space-y-6">
             {/* RSVP Button */}
+            <RSVPButton event={event} />
+
+            {/* Event Actions */}
             <div className="bg-white/60 backdrop-blur-sm rounded-2xl border border-gray-100 p-6">
-              <h3 className="text-lg font-medium text-gray-900 mb-4">Join This Event</h3>
-              <button className="w-full bg-gray-900 text-white py-3 px-4 rounded-xl font-medium hover:bg-gray-800 transition-colors duration-200 mb-3">
-                RSVP Now
-              </button>
-              <p className="text-sm text-gray-500 text-center">
-                {event.rsvpCount ? `${event.rsvpCount} people are attending` : 'Be the first to RSVP'}
-              </p>
+              <h3 className="text-lg font-medium text-gray-900 mb-4">Event Actions</h3>
+              <EventActionButtons event={event} />
             </div>
 
             {/* Event Info */}
@@ -148,7 +149,7 @@ export default function EventDetails({ event }: EventDetailsProps) {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-600">Date</span>
-                  <span className="font-medium text-gray-900">{formattedDate.date}</span>
+                  <span className="font-medium text-gray-900 pl-5">{formattedDate.date}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-600">Time</span>
