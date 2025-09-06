@@ -1,0 +1,47 @@
+🎯 Objective
+Build a mini Event Management System where users can:
+• View upcoming events
+• Create a new event
+• Filter/search events
+• View details of a single event
+📦 Task Modules
+Module 1: Project Setup & Layout
+• Create a Next.js app with a simple layout (Header + Main content).
+• Header should have navigation: Home | Create Event | My Events
+✅ Evaluates: project setup, layout structure, navigation
+Module 2: Event List (Home Page)
+• Display a list of events (title, date, location).
+• Use a provided mock API (/api/events in Next.js).
+• Add search bar (filter by title).
+• Add category filter (e.g., Conference, Workshop, Meetup).
+✅ Evaluates: data fetching, filtering, conditional rendering
+Module 3: Event Details Page
+• Dynamic route: /events/[id]
+• Show event details: title, description, date, location, category.
+✅ Evaluates: Next.js dynamic routing, SSR/CSR understanding
+Module 4: Create Event Page
+• Form with: title, description, date, location, category.
+• On submit → add to local state (or localStorage).
+• Redirect back to My Events page.
+✅ Evaluates: forms, controlled components, validation
+Module 5: My Events Page
+• Show only events created by the user.
+• Allow deleting an event.
+✅ Evaluates: state management, CRUD basics
+Bonus (Optional)
+• Add RSVP button → track how many people will attend.
+• Add ability to edit an event.
+• Deploy to Vercel.
+✅ Evaluates: extra effort, real-world mindset
+🔍 Evaluation Criteria
+✅ Clean, modular code (components, hooks)
+✅ Correct use of Next.js features (routing, API routes, data fetching)
+✅ State management (local state, context, or Zustand/Redux)
+✅ UI/UX (form handling, error states, responsiveness)
+✅ Documentation (README, setup steps)
+👉 This is unique but small enough, and it touches:
+• Data fetching (API / JSON)
+• Routing (dynamic pages)
+• Forms & validation
+• State management & persistence
+• Component reusability
