@@ -16,7 +16,7 @@ export default function NotFound() {
           </h1>
           
           <p className="text-gray-600 mb-8 leading-relaxed">
-            The event you're looking for doesn't exist or may have been removed.
+            The event you&apos;re looking for doesn&apos;t exist or may have been removed.
           </p>
           
           <div className="space-y-3">

@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { Event, CreateEventRequest } from '@/app/types/event';
 
 // In-memory mock data
-export let events: Event[] = [
+export const events: Event[] = [
   {
     id: '1',
     title: 'React Conference 2024',

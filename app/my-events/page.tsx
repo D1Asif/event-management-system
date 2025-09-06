@@ -96,7 +96,7 @@ export default function MyEventsPage() {
             My Events
           </h1>
           <p className="text-gray-600">
-            Manage and view all the events you've created.
+            Manage and view all the events you&apos;ve created.
           </p>
         </div>
 
@@ -118,7 +118,7 @@ export default function MyEventsPage() {
               </svg>
               <h3 className="text-lg font-medium text-gray-900 mb-2">No Events Created Yet</h3>
               <p className="text-gray-600 mb-6">
-                You haven't created any events yet. Create your first event to get started!
+                You haven&apos;t created any events yet. Create your first event to get started!
               </p>
               <a
                 href="/create-event"

@@ -44,7 +44,7 @@ export default function EventActionButtons({ event }: EventActionButtonsProps) {
       if (data.success) {
         // Remove from localStorage
         const userEvents = JSON.parse(localStorage.getItem('userEvents') || '[]');
-        const updatedUserEvents = userEvents.filter((userEvent: any) => userEvent.id !== event.id);
+        const updatedUserEvents = userEvents.filter((userEvent: Event) => userEvent.id !== event.id);
         localStorage.setItem('userEvents', JSON.stringify(updatedUserEvents));
 
         // Refresh the page to update the UI

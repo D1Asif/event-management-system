@@ -55,7 +55,7 @@ export default function EditEventForm({ event, onSubmit }: EditEventFormProps) {
     }
 
     if (!formData.category) {
-      newErrors.category = 'Category is required';
+      newErrors.category = 'Category is required' as unknown as undefined;
     }
 
     setErrors(newErrors);

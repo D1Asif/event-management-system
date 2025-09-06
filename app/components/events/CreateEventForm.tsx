@@ -2,11 +2,11 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { CreateEventRequest } from '@/app/types/event';
+import { CreateEventRequest, Event } from '@/app/types/event';
 import { addUserEvent } from '@/app/utils/localStorage';
 
 interface CreateEventFormProps {
-  onSubmit?: (event: any) => void;
+  onSubmit?: (event: Event) => void;
 }
 
 export default function CreateEventForm({ onSubmit }: CreateEventFormProps) {
@@ -55,7 +55,7 @@ export default function CreateEventForm({ onSubmit }: CreateEventFormProps) {
     }
 
     if (!formData.category) {
-      newErrors.category = 'Category is required';
+      newErrors.category = 'Category is required' as unknown as undefined;
     }
 
     setErrors(newErrors);
