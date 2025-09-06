@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { events } from '../../route';
+import { readEvents, writeEvents } from '@/app/utils/eventsData';
 
 // POST /api/events/[id]/rsvp - RSVP to an event
 export async function POST(
@@ -16,6 +16,7 @@ export async function POST(
       }, { status: 400 });
     }
 
+    const events = await readEvents();
     const eventIndex = events.findIndex(event => event.id === id);
 
     if (eventIndex === -1) {
@@ -28,6 +29,8 @@ export async function POST(
     // Increment RSVP count
     events[eventIndex].rsvpCount = (events[eventIndex].rsvpCount || 0) + 1;
     events[eventIndex].updatedAt = new Date().toISOString();
+
+    await writeEvents(events);
 
     return NextResponse.json({
       success: true,
@@ -59,6 +62,7 @@ export async function DELETE(
       }, { status: 400 });
     }
 
+    const events = await readEvents();
     const eventIndex = events.findIndex(event => event.id === id);
 
     if (eventIndex === -1) {
@@ -71,6 +75,8 @@ export async function DELETE(
     // Decrement RSVP count (minimum 0)
     events[eventIndex].rsvpCount = Math.max((events[eventIndex].rsvpCount || 0) - 1, 0);
     events[eventIndex].updatedAt = new Date().toISOString();
+
+    await writeEvents(events);
 
     return NextResponse.json({
       success: true,

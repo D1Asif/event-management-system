@@ -1,29 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Event, UpdateEventRequest } from '@/app/types/event';
-import { events } from '../route';
-
-// Helper function to find event by ID
-function findEventById(id: string): Event | undefined {
-  return events.find(event => event.id === id);
-}
-
-// Helper function to update event in array
-function updateEventInArray(updatedEvent: Event): void {
-  const index = events.findIndex(event => event.id === updatedEvent.id);
-  if (index !== -1) {
-    events[index] = updatedEvent;
-  }
-}
-
-// Helper function to delete event from array
-function deleteEventFromArray(id: string): boolean {
-  const index = events.findIndex(event => event.id === id);
-  if (index !== -1) {
-    events.splice(index, 1);
-    return true;
-  }
-  return false;
-}
+import { findEventById, updateEventInFile, deleteEventFromFile } from '@/app/utils/eventsData';
 
 // GET /api/events/[id] - Get a single event by ID
 export async function GET(
@@ -40,7 +17,7 @@ export async function GET(
       }, { status: 400 });
     }
 
-    const event = findEventById(id);
+    const event = await findEventById(id);
 
     if (!event) {
       return NextResponse.json({
@@ -78,7 +55,7 @@ export async function DELETE(
       }, { status: 400 });
     }
 
-    const event = findEventById(id);
+    const event = await findEventById(id);
 
     if (!event) {
       return NextResponse.json({
@@ -87,7 +64,7 @@ export async function DELETE(
       }, { status: 404 });
     }
 
-    const deleted = deleteEventFromArray(id);
+    const deleted = await deleteEventFromFile(id);
 
     if (!deleted) {
       return NextResponse.json({
@@ -126,7 +103,7 @@ export async function PATCH(
       }, { status: 400 });
     }
 
-    const existingEvent = findEventById(id);
+    const existingEvent = await findEventById(id);
 
     if (!existingEvent) {
       return NextResponse.json({
@@ -170,7 +147,7 @@ export async function PATCH(
       isUserEvent: existingEvent.isUserEvent // Preserve user event flag
     };
 
-    updateEventInArray(updatedEvent);
+    await updateEventInFile(updatedEvent);
 
     return NextResponse.json({
       success: true,

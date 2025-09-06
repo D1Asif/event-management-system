@@ -1,69 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Event, CreateEventRequest } from '@/app/types/event';
-
-// In-memory mock data
-export const events: Event[] = [
-  {
-    id: '1',
-    title: 'React Conference 2024',
-    description: 'A comprehensive conference covering the latest in React development, including hooks, concurrent features, and performance optimization.',
-    date: '2024-03-15T10:00:00Z',
-    location: 'San Francisco, CA',
-    category: 'Conference',
-    createdAt: '2024-01-15T08:00:00Z',
-    updatedAt: '2024-01-15T08:00:00Z',
-    rsvpCount: 150,
-    isUserEvent: false
-  },
-  {
-    id: '2',
-    title: 'TypeScript Workshop',
-    description: 'Learn TypeScript from basics to advanced concepts. Hands-on coding sessions and real-world examples.',
-    date: '2024-03-20T14:00:00Z',
-    location: 'New York, NY',
-    category: 'Workshop',
-    createdAt: '2024-01-20T09:00:00Z',
-    updatedAt: '2024-01-20T09:00:00Z',
-    rsvpCount: 25,
-    isUserEvent: false
-  },
-  {
-    id: '3',
-    title: 'Tech Meetup',
-    description: 'Monthly tech meetup for developers to network and share knowledge. This month\'s topic: AI in Web Development.',
-    date: '2024-03-25T18:00:00Z',
-    location: 'Austin, TX',
-    category: 'Meetup',
-    createdAt: '2024-01-25T10:00:00Z',
-    updatedAt: '2024-01-25T10:00:00Z',
-    rsvpCount: 45,
-    isUserEvent: false
-  },
-  {
-    id: '4',
-    title: 'Design System Workshop',
-    description: 'Building scalable design systems with Figma and React. Learn best practices for component libraries.',
-    date: '2024-04-01T09:00:00Z',
-    location: 'Seattle, WA',
-    category: 'Workshop',
-    createdAt: '2024-02-01T11:00:00Z',
-    updatedAt: '2024-02-01T11:00:00Z',
-    rsvpCount: 30,
-    isUserEvent: false
-  },
-  {
-    id: '5',
-    title: 'Startup Pitch Night',
-    description: 'Watch innovative startups pitch their ideas to investors. Networking event for entrepreneurs and investors.',
-    date: '2024-04-05T19:00:00Z',
-    location: 'Boston, MA',
-    category: 'Other',
-    createdAt: '2024-02-05T12:00:00Z',
-    updatedAt: '2024-02-05T12:00:00Z',
-    rsvpCount: 80,
-    isUserEvent: false
-  }
-];
+import { readEvents, addEventToFile } from '@/app/utils/eventsData';
 
 // GET /api/events - Get all events
 export async function GET(request: NextRequest) {
@@ -72,6 +9,7 @@ export async function GET(request: NextRequest) {
     const category = searchParams.get('category');
     const search = searchParams.get('search');
 
+    const events = await readEvents();
     let filteredEvents = [...events];
 
     // Filter by category if provided
@@ -138,9 +76,12 @@ export async function POST(request: NextRequest) {
       }, { status: 400 });
     }
 
+    // Get existing events to generate new ID
+    const existingEvents = await readEvents();
+    
     // Create new event
     const newEvent: Event = {
-      id: (events.length + 1).toString(),
+      id: (existingEvents.length + 1).toString(),
       title: body.title.trim(),
       description: body.description.trim(),
       date: body.date,
@@ -152,7 +93,7 @@ export async function POST(request: NextRequest) {
       isUserEvent: true
     };
 
-    events.push(newEvent);
+    await addEventToFile(newEvent);
 
     return NextResponse.json({
       success: true,
